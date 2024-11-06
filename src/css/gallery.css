@@ -1,12 +1,16 @@
+.gallery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
 .form{
     margin-top: 36px;
     margin-bottom: 32px;
-    margin-left: auto;
-    margin-right: auto;
     display: flex;
     justify-content: center;
-    
-
 }
 
 .input{
@@ -108,7 +112,7 @@ justify-content: center;
     align-items: center;
 }
 
-.loader-unvisible{
+.unvisible{
 display: none;
 }
 
@@ -158,4 +162,22 @@ display: none;
     100% {
         clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
     }
+}
+
+
+.load-btn {
+    border: none;
+        border-radius: 8px;
+        padding: 8px 16px;
+        height: 40px;
+        background-color: #4e75ff;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 150%;
+        letter-spacing: 0.04em;
+        color: #fff;
+}
+
+.load-btn:hover {
+    background-color: #6c8cff;
 }

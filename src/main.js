@@ -8,8 +8,12 @@ const form = document.querySelector(".form");
 const input = document.querySelector(".input");
 let search = null;
 
+const galleryContainer = document.querySelector(".gallery")
+
+
 form.addEventListener("submit", (event) => {
     event.preventDefault()
+    localStorage.removeItem("search")
     search = input.value
     if (search.trim() === "") {
         iziToast.error({
@@ -25,7 +29,8 @@ form.addEventListener("submit", (event) => {
             });
     }
     else {
-        searchImage(search)
+        localStorage.setItem("search", search )
+        searchImage()
     }
     form.reset()
 });
