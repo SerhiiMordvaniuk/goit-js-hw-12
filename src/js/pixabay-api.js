@@ -16,31 +16,35 @@ const loader = document.querySelector('.loader');
 const gallery = document.querySelector(".gallery-list");
 const loadBtn = document.querySelector('.load-btn')
 
+let page;
+let lightbox;
 
-let page = 1;
+export function searchImage() {
+    page = 1;
 
-export  function searchImage() {
 
-
-    let params = new URLSearchParams({
-    key: API_KEY,
-    q: `${localStorage.getItem("search")}`,
-    image_type: "photo",
-    orientation: "horizontal",
-    safesearch: true,
-    per_page: 15,
-    page: page,
-    })
+    
 
     loader.classList.remove('unvisible');
     loadBtn.classList.add('unvisible');
 
     gallery.innerHTML = "";
-    console.log("clin");
     
+    zaput()
+}
 
+async function zaput() {
 
-    axios.get(`https://pixabay.com/api/?${params}`)
+        let params = new URLSearchParams({
+        key: API_KEY,
+        q: `${localStorage.getItem("search")}`,
+        image_type: "photo",
+        orientation: "horizontal",
+        safesearch: true,
+        per_page: 15,
+        page: page,
+    })
+    await axios.get(`https://pixabay.com/api/?${params}`)
         .then(data => {       
             if (data.data.hits.length == 0) {
                 loader.classList.add('unvisible');
@@ -59,15 +63,16 @@ export  function searchImage() {
             }
             else {
                 loader.classList.add('unvisible');
-                gallery.insertAdjacentHTML("beforebegin", createGallery(data.data.hits));
-            
-                let lightbox = new SimpleLightbox('.gallery-item a', {
+                gallery.insertAdjacentHTML("beforeend", createGallery(data.data.hits));
+
+                lightbox = new SimpleLightbox('.gallery-item a', {
                     disableScroll: false,
                     overlayOpacity: 0.9,
                     disableRightClick: true,
                 });
+
                 loadBtn.classList.remove('unvisible');
-                page++
+                page++;
             }
         })
         .catch(error => {
@@ -85,9 +90,12 @@ export  function searchImage() {
                 maxWidth: "300"
             })
         })
-    }
+    lightbox.refresh()
+
+}
 
 
 loadBtn.addEventListener("click", () => {
-    searchImage()
+    zaput()
 })
+
