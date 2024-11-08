@@ -24,17 +24,17 @@ let totalPage;
 
 
 export function searchImage() {
-    page = 1;
+    page = 30;
 
     loader.classList.remove('unvisible');
     loadBtn.classList.add('unvisible');
 
     gallery.innerHTML = "";
     
-    zaput()
+    createList()
 }
 
-async function zaput() {
+async function createList() {
 
         let params = new URLSearchParams({
         key: API_KEY,
@@ -47,7 +47,7 @@ async function zaput() {
     })
     await axios.get(`https://pixabay.com/api/?${params}`)
         .then(data => {
-            totalPage = Math.round(data.data.totalHits / 15)+1 ;
+            totalPage = Math.round(data.data.totalHits / 15) ;
             if (data.data.hits.length == 0) {
                 loader.classList.add('unvisible');
                 iziToast.error({
@@ -96,8 +96,14 @@ async function zaput() {
 
 loadBtn.addEventListener("click", async () => {
     page++;
-
-    if (page >= totalPage) {
+    console.log(page);
+    console.log(totalPage);
+    
+    
+    await lightbox.refresh()
+    await createList()
+    
+    if (page > totalPage) { 
         loadBtn.classList.add("unvisible")
         iziToast.error({
                     message: "We're sorry, but you've reached the end of search results.",
@@ -111,10 +117,7 @@ loadBtn.addEventListener("click", async () => {
                     icon: false,
                     maxWidth: "300"
         });
-        return
     }
-
-    await zaput()
 
     const item = document.querySelector(".gallery-item")
     const itemHeight = item.getBoundingClientRect().height;
