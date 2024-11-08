@@ -72,8 +72,6 @@ async function createList() {
         })
         .catch(error => {
             loader.classList.add('unvisible');
-            console.log(error);
-            
             iziToast.error({
                 message: `Oooops, error. Please try again!`,
                 position: 'center',
@@ -98,8 +96,6 @@ async function createList() {
 loadBtn.addEventListener("click", async () => {
     lightbox.destroy()
     page++;
-    console.log(page);
-    console.log(totalPage);
 
     await createList()
     
@@ -128,8 +124,3 @@ loadBtn.addEventListener("click", async () => {
         behavior: "smooth"
     })   
 })
-
-
-// lightbox.refresh()
-        // lightbox.destroy()
-        
