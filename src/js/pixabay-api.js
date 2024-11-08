@@ -104,6 +104,7 @@ loadBtn.addEventListener("click", async () => {
     await createList()
     
     if (page > totalPage) { 
+
         loadBtn.classList.add("unvisible")
         iziToast.error({
                     message: "We're sorry, but you've reached the end of search results.",
@@ -118,6 +119,7 @@ loadBtn.addEventListener("click", async () => {
                     maxWidth: "300"
         });
     }
+
 
     const item = document.querySelector(".gallery-item")
     const itemHeight = item.getBoundingClientRect().height;
