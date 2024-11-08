@@ -24,7 +24,7 @@ let totalPage;
 
 
 export function searchImage() {
-    page = 30;
+    page = 1;
 
     loader.classList.remove('unvisible');
     loadBtn.classList.add('unvisible');
@@ -35,6 +35,7 @@ export function searchImage() {
 }
 
 async function createList() {
+    
 
         let params = new URLSearchParams({
         key: API_KEY,
@@ -95,16 +96,14 @@ async function createList() {
 
 
 loadBtn.addEventListener("click", async () => {
+    lightbox.destroy()
     page++;
     console.log(page);
     console.log(totalPage);
-    
-    
-    await lightbox.refresh()
+
     await createList()
     
     if (page > totalPage) { 
-
         loadBtn.classList.add("unvisible")
         iziToast.error({
                     message: "We're sorry, but you've reached the end of search results.",
@@ -129,3 +128,8 @@ loadBtn.addEventListener("click", async () => {
         behavior: "smooth"
     })   
 })
+
+
+// lightbox.refresh()
+        // lightbox.destroy()
+        
