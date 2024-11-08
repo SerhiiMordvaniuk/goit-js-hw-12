@@ -11,6 +11,7 @@
     margin-bottom: 32px;
     display: flex;
     justify-content: center;
+    gap: 24px;
 }
 
 .input{
@@ -22,15 +23,17 @@
     border: 1px solid #808080;
     padding-left: 16px;
     background-color: transparent;
+    transition: all 250ms ease-in-out;
 }
 
 .input:hover,
 .input:focus {
-    border: 1px solid black;
+    border: 1px solid #6c6b6b;
 }
 
 .input:focus-within {
-    border: 1px solid #4e75ff;
+    border: 1px solid rgb(105, 156, 150);
+    
 }
 
 .button{
@@ -39,16 +42,18 @@
     padding: 8px 16px;
     width: 91px;
     height: 40px;
-    background-color:#4e75ff;
+    background-color:rgb(105, 156, 150);
     font-weight: 500;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.04em;
-    color: #fff;
+    color: rgb(206, 231, 233);
+    transition: all 250ms ease;
 }
 
 .button:hover {
-    background-color: #6c8cff;
+    background-color:rgb(87, 147, 140);
+    color: rgb(233, 243, 244);
 }
 
 .gallery-list {
@@ -62,9 +67,15 @@ height: 200;
 width: 360px;
 display: flex;
 flex-direction: column;
-border: 1px solid #808080;
+border: none;
 border-radius: 8px;
 overflow: hidden;
+transition: all 400ms ease-in-out;
+}
+
+.gallery-item:hover, .gallery-item:focus {
+    transform: scale(1.05);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
 }
 
 .galerry-img {
@@ -72,6 +83,7 @@ overflow: hidden;
     width:360px;
     height: 200px;
     object-fit: cover;
+    background-color: #DDD9CA;
 }
 
 .gallery-text-container {
@@ -84,10 +96,11 @@ font-weight: 600;
 font-size: 16px;
 line-height: 133%;
 letter-spacing: 0.04em;
-color: #2e2f42;
+color: #403F39;
 display: flex;
 gap: 28px;
 justify-content: center;
+background-color: rgb(226, 219, 208);
 }
 
 .item-span{
@@ -104,12 +117,14 @@ justify-content: center;
     justify-content: center;
     align-items: center;
     margin-top: 8px;
+
 }
 
 .loader-container{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
 }
 
 .unvisible{
@@ -119,8 +134,8 @@ display: none;
 
 
 .loader {
-    width: 48px;
-    height: 48px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     position: relative;
     animation: rotate 1s linear infinite
@@ -132,7 +147,7 @@ display: none;
     position: absolute;
     inset: 0px;
     border-radius: 50%;
-    border: 5px solid #848282;
+    border: 7px solid rgb(87, 147, 140);;
     animation: prixClipFix 2s linear infinite;
 }
 
@@ -170,14 +185,16 @@ display: none;
         border-radius: 8px;
         padding: 8px 16px;
         height: 40px;
-        background-color: #4e75ff;
+        background-color: rgb(105, 156, 150);
         font-weight: 500;
         font-size: 16px;
         line-height: 150%;
         letter-spacing: 0.04em;
-        color: #fff;
+    color: rgb(206, 231, 233);
+    transition: all 250ms ease-in-out;
 }
 
 .load-btn:hover {
-    background-color: #6c8cff;
+    background-color: rgb(87, 147, 140);
+    color: rgb(233, 243, 244);
 }

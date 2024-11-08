@@ -94,6 +94,9 @@ async function createList() {
 
 
 loadBtn.addEventListener("click", async () => {
+    loader.classList.remove('unvisible');
+    loadBtn.classList.add("unvisible")
+
     lightbox.destroy()
     page++;
 
