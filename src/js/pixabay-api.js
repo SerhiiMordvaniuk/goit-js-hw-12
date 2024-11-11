@@ -132,6 +132,7 @@ loadBtn.addEventListener("click", async () => {
 
     const item = document.querySelector(".gallery-item")
     const itemHeight = item.getBoundingClientRect().height;
+    
     window.scrollBy({
         left: 0,
         top: itemHeight * 2,
