@@ -16,12 +16,27 @@ const loader = document.querySelector('.loader');
 const gallery = document.querySelector(".gallery-list");
 const loadBtn = document.querySelector('.load-btn')
 
+
+
 let page = 1;
 let lightbox;
 let totalPage;
 
 
-
+function endSearch() {
+    iziToast.error({
+        message: "We're sorry, but you've reached the end of search results.",
+        position: 'center',
+        color: 'green',
+        messageColor: "black",
+        close: true,
+        timeout: 2000,
+        progressBar: true,
+        iconColor: "white",
+        icon: false,
+        maxWidth: "300"
+    });
+}
 
 export function searchImage() {
     page = 30;
@@ -68,7 +83,12 @@ async function createList() {
             else {
                 loader.classList.add('unvisible');
                 gallery.insertAdjacentHTML("beforeend", createGallery(data.data.hits));
+                if (data.data.hits.length < 15) {
+                endSearch()
+                }
+                else {
                 loadBtn.classList.remove('unvisible');
+                }
             }
         })
         .catch(error => {
@@ -86,6 +106,7 @@ async function createList() {
                 maxWidth: "300"
             })
         })
+    
     lightbox = new SimpleLightbox('.gallery-item a', {
         disableScroll: false,
         overlayOpacity: 0.9,
@@ -103,26 +124,11 @@ loadBtn.addEventListener("click", async () => {
     page++;
 
     await createList()
-    console.log(page);
-    console.log(totalPage);
-    
     
     if (page >= totalPage) { 
         loadBtn.classList.add("unvisible")
-        iziToast.error({
-                    message: "We're sorry, but you've reached the end of search results.",
-                    position: 'center',
-                    color: 'green',
-                    messageColor: "black",
-                    close: true,
-                    timeout: 2000,
-                    progressBar: true,
-                    iconColor: "white",
-                    icon: false,
-                    maxWidth: "300"
-        });
+        endSearch()
     }
-
 
     const item = document.querySelector(".gallery-item")
     const itemHeight = item.getBoundingClientRect().height;
