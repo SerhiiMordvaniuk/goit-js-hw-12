@@ -24,7 +24,7 @@ let totalPage;
 
 
 export function searchImage() {
-    page = 1;
+    page = 30;
 
     loader.classList.remove('unvisible');
     loadBtn.classList.add('unvisible');
@@ -48,7 +48,8 @@ async function createList() {
     })
     await axios.get(`https://pixabay.com/api/?${params}`)
         .then(data => {
-            totalPage = Math.round(data.data.totalHits / 15) ;
+            totalPage = Math.ceil(data.data.totalHits / 15) ;
+            
             if (data.data.hits.length == 0) {
                 loader.classList.add('unvisible');
                 iziToast.error({
@@ -89,6 +90,7 @@ async function createList() {
         disableScroll: false,
         overlayOpacity: 0.9,
         disableRightClick: true,
+        disableScroll: false
     });
 }
 
@@ -101,8 +103,11 @@ loadBtn.addEventListener("click", async () => {
     page++;
 
     await createList()
+    console.log(page);
+    console.log(totalPage);
     
-    if (page > totalPage) { 
+    
+    if (page >= totalPage) { 
         loadBtn.classList.add("unvisible")
         iziToast.error({
                     message: "We're sorry, but you've reached the end of search results.",
@@ -127,3 +132,4 @@ loadBtn.addEventListener("click", async () => {
         behavior: "smooth"
     })   
 })
+

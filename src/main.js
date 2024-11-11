@@ -25,7 +25,7 @@ form.addEventListener("submit", (event) => {
                 timeout: 1000,
                 progressBar: false,
                 iconColor: "white",
-                con: false,
+                con: false,z
             });
     }
     else {
