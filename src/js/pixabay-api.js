@@ -39,7 +39,7 @@ function endSearch() {
 }
 
 export function searchImage() {
-    page = 30;
+    page = 1;
 
     loader.classList.remove('unvisible');
     loadBtn.classList.add('unvisible');
